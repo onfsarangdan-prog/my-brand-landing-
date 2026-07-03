@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUMEA — 회원가입 · 로그인</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .auth-wrap{max-width:380px;margin:80px auto 100px;padding:0 24px;}
+  .tabs{display:flex;border:1px solid var(--line-strong);border-radius:999px;padding:4px;margin-bottom:32px;}
+  .tab{
+    flex:1;text-align:center;padding:10px 0;border-radius:999px;
+    font-size:14px;font-weight:600;cursor:pointer;color:var(--ink-soft);
+  }
+  .tab.active{background:var(--ink);color:var(--bg);}
+  .auth-form{display:flex;flex-direction:column;gap:14px;}
+  .auth-form.hidden{display:none;}
+  .auth-msg{text-align:center;font-size:14px;min-height:20px;margin:4px 0 0;}
+  .auth-msg.ok{color:#5FA776;}
+  .auth-msg.err{color:#D26B5A;}
+  .mypage{max-width:380px;margin:100px auto;padding:0 24px;text-align:center;}
+  .mypage .email{font-family:'Manrope',sans-serif;font-weight:700;font-size:20px;margin:10px 0 30px;}
+  .hidden{display:none;}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a href="index.html" style="text-decoration:none;"><span class="wordmark">LUMEA</span></a>
+    <a href="index.html" class="nav-cta">홈으로</a>
+  </div>
+</nav>
+
+<div id="authSection" class="auth-wrap">
+  <div class="tabs">
+    <div class="tab active" id="tabSignup">회원가입</div>
+    <div class="tab" id="tabLogin">로그인</div>
+  </div>
+
+  <form id="signupForm" class="auth-form">
+    <div class="field">
+      <label for="suEmail">이메일</label>
+      <input id="suEmail" type="email" placeholder="name@email.com" required>
+    </div>
+    <div class="field">
+      <label for="suPassword">비밀번호</label>
+      <input id="suPassword" type="password" placeholder="6자 이상" minlength="6" required>
+    </div>
+    <button type="submit" class="btn-primary btn-block">회원가입</button>
+    <p id="signupMsg" class="auth-msg" role="status" aria-live="polite"></p>
+  </form>
+
+  <form id="loginForm" class="auth-form hidden">
+    <div class="field">
+      <label for="liEmail">이메일</label>
+      <input id="liEmail" type="email" placeholder="name@email.com" required>
+    </div>
+    <div class="field">
+      <label for="liPassword">비밀번호</label>
+      <input id="liPassword" type="password" placeholder="비밀번호" required>
+    </div>
+    <button type="submit" class="btn-primary btn-block">로그인</button>
+    <p id="loginMsg" class="auth-msg" role="status" aria-live="polite"></p>
+  </form>
+</div>
+
+<div id="mypage" class="mypage hidden">
+  <p style="color:var(--ink-soft);">환영합니다</p>
+  <p class="email" id="userEmail"></p>
+  <a href="index.html#reserve" class="btn-primary" style="margin-bottom:14px;display:inline-block;">사전예약 하러 가기</a>
+  <div><button id="logoutBtn" class="logout" style="background:none;border:none;color:var(--ink-soft);text-decoration:underline;cursor:pointer;font-size:14px;">로그아웃</button></div>
+</div>
+
+<script type="module">
+  import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+  const SUPABASE_URL = 'https://ixyiocarjhkqmytlfgoa.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_n65G5dgJYztBtP3YtSwMjA_PGEBmXUA';
+  const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  const authSection = document.getElementById('authSection');
+  const mypage = document.getElementById('mypage');
+  const tabSignup = document.getElementById('tabSignup');
+  const tabLogin = document.getElementById('tabLogin');
+  const signupForm = document.getElementById('signupForm');
+  const loginForm = document.getElementById('loginForm');
+
+  tabSignup.addEventListener('click', () => {
+    tabSignup.classList.add('active');
+    tabLogin.classList.remove('active');
+    signupForm.classList.remove('hidden');
+    loginForm.classList.add('hidden');
+  });
+  tabLogin.addEventListener('click', () => {
+    tabLogin.classList.add('active');
+    tabSignup.classList.remove('active');
+    loginForm.classList.remove('hidden');
+    signupForm.classList.add('hidden');
+  });
+
+  signupForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const msg = document.getElementById('signupMsg');
+    msg.textContent = '';
+    msg.className = 'auth-msg';
+
+    const email = document.getElementById('suEmail').value.trim();
+    const password = document.getElementById('suPassword').value;
+
+    const { error } = await supabase.auth.signUp({ email, password });
+
+    if (error) {
+      msg.textContent = error.message.includes('already registered')
+        ? '이미 가입된 이메일이에요.'
+        : '회원가입 중 문제가 생겼어요: ' + error.message;
+      msg.classList.add('err');
+      return;
+    }
+    msg.textContent = '가입 완료! 로그인 탭에서 로그인해주세요.';
+    msg.classList.add('ok');
+    signupForm.reset();
+  });
+
+  loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const msg = document.getElementById('loginMsg');
+    msg.textContent = '';
+    msg.className = 'auth-msg';
+
+    const email = document.getElementById('liEmail').value.trim();
+    const password = document.getElementById('liPassword').value;
+
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
+    if (error) {
+      msg.textContent = '이메일 또는 비밀번호가 올바르지 않아요.';
+      msg.classList.add('err');
+      return;
+    }
+    showMypage(data.user.email);
+  });
+
+  document.getElementById('logoutBtn').addEventListener('click', async () => {
+    await supabase.auth.signOut();
+    mypage.classList.add('hidden');
+    authSection.classList.remove('hidden');
+  });
+
+  function showMypage(email){
+    document.getElementById('userEmail').textContent = email;
+    authSection.classList.add('hidden');
+    mypage.classList.remove('hidden');
+  }
+
+  // 이미 로그인되어 있는 상태로 페이지에 들어온 경우 자동으로 마이페이지 표시
+  supabase.auth.getSession().then(({ data }) => {
+    if (data.session) showMypage(data.session.user.email);
+  });
+</script>
+
+</body>
+</html>

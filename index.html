@@ -135,6 +135,37 @@
         </div>
       </div>
       <div class="field">
+        <label for="channel">LUMEA를 알게 된 경로</label>
+        <select id="channel" name="channel" required>
+          <option value="" disabled selected>선택해주세요</option>
+          <option value="인스타그램">인스타그램</option>
+          <option value="지인 추천">지인 추천</option>
+          <option value="검색">검색</option>
+          <option value="기타">기타</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="priceRange">희망 가격대</label>
+        <select id="priceRange" name="priceRange" required>
+          <option value="" disabled selected>선택해주세요</option>
+          <option value="3만원대">3만원대</option>
+          <option value="5만원대">5만원대</option>
+          <option value="7만원대">7만원대</option>
+          <option value="10만원 이상">10만원 이상</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="purchaseIntent">구매 의향 (1점: 그냥 궁금함 ~ 5점: 꼭 살 것 같음)</label>
+        <div class="intent-scale" id="purchaseIntentGroup">
+          <button type="button" class="intent-btn" data-value="1">1</button>
+          <button type="button" class="intent-btn" data-value="2">2</button>
+          <button type="button" class="intent-btn" data-value="3">3</button>
+          <button type="button" class="intent-btn" data-value="4">4</button>
+          <button type="button" class="intent-btn" data-value="5">5</button>
+        </div>
+        <input type="hidden" id="purchaseIntent" required>
+      </div>
+      <div class="field">
         <label for="reason">기대되는 이유 (한 줄)</label>
         <input id="reason" name="reason" type="text" placeholder="예: 은은한 조명이 마음에 들어서">
       </div>

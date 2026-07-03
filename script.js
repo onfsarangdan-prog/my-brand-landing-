@@ -30,12 +30,29 @@ async function refreshCount() {
   dialProgress.style.strokeDashoffset = offset;
 }
 
+const intentButtons = document.querySelectorAll('.intent-btn');
+const intentInput = document.getElementById('purchaseIntent');
+intentButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    intentButtons.forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    intentInput.value = btn.dataset.value;
+  });
+});
+
 const form = document.getElementById('waitlistForm');
 const submitBtn = document.getElementById('submitBtn');
 const formMsg = document.getElementById('formMsg');
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
+
+  if (!intentInput.value) {
+    formMsg.textContent = '구매 의향 점수를 선택해주세요.';
+    formMsg.className = 'form-msg err';
+    return;
+  }
+
   submitBtn.disabled = true;
   formMsg.textContent = '';
   formMsg.className = 'form-msg';
@@ -44,11 +61,22 @@ form.addEventListener('submit', async (e) => {
   const email = document.getElementById('email').value.trim();
   const ageGroup = document.getElementById('ageGroup').value;
   const region = document.getElementById('region').value;
+  const channel = document.getElementById('channel').value;
+  const priceRange = document.getElementById('priceRange').value;
+  const purchaseIntent = parseInt(intentInput.value, 10);
   const reason = document.getElementById('reason').value.trim();
 
   const { error } = await supabase
     .from('waitlist')
-    .insert([{ name, email, age_group: ageGroup, region, reason }]);
+    .insert([{
+      name, email,
+      age_group: ageGroup,
+      region,
+      channel,
+      price_range: priceRange,
+      purchase_intent: purchaseIntent,
+      reason
+    }]);
 
   if (error) {
     formMsg.textContent = '신청 중 문제가 생겼어요. 잠시 후 다시 시도해주세요.';
@@ -60,6 +88,8 @@ form.addEventListener('submit', async (e) => {
   formMsg.textContent = '신청 완료! LUMEA 소식을 가장 먼저 전해드릴게요.';
   formMsg.classList.add('ok');
   form.reset();
+  intentButtons.forEach(b => b.classList.remove('selected'));
+  intentInput.value = '';
   submitBtn.disabled = false;
   refreshCount();
 });

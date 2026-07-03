@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUMEA — Glow Diffuser</title>
+<meta name="description" content="당신의 공간을 빛과 감정으로 채우는 감성 디퓨저, LUMEA Glow Diffuser 사전예약">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;500;700&family=Fraunces:ital,wght@1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <span class="wordmark">LUMEA</span>
+    <div style="display:flex;align-items:center;gap:16px;">
+      <a href="account.html" style="font-size:14px;color:var(--ink-soft);text-decoration:none;">로그인</a>
+      <a href="#reserve" class="nav-cta">사전예약</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="glow-orb" aria-hidden="true"></div>
+  <div class="wrap hero-inner">
+    <p class="eyebrow">LUMEA Glow Diffuser</p>
+    <h1>당신의 공간을<br><em>빛과 감정</em>으로 채우다</h1>
+    <p class="hero-sub">향과 빛이 하나로 움직이는 감성 디퓨저. 미니멀한 디자인 안에 담긴 프리미엄 라이프스타일.</p>
+    <a href="#reserve" class="btn-primary">사전예약 신청하기</a>
+  </div>
+</header>
+
+<section class="showcase">
+  <div class="wrap showcase-grid">
+    <div class="showcase-media">
+      <img src="hero-1.jpg" alt="따뜻한 조명이 켜진 거실 테이블 위의 LUMEA Glow Diffuser">
+    </div>
+    <div class="showcase-copy">
+      <p class="section-eyebrow">Product</p>
+      <h2>빛으로 완성하는<br>공간의 무드</h2>
+      <p>LUMEA는 향을 퍼뜨리는 동시에, 공간의 감정을 은은한 빛으로 표현합니다. 하루의 시작과 끝, 당신의 공간에 어울리는 온도의 빛을 찾아드립니다.</p>
+    </div>
+  </div>
+</section>
+
+<section class="showcase showcase--reverse">
+  <div class="wrap showcase-grid">
+    <div class="showcase-copy">
+      <p class="section-eyebrow">Atmosphere</p>
+      <h2>미래적인 감각,<br>편안한 몰입</h2>
+      <p>불필요한 장식을 덜어낸 실루엣과, 은은하게 번지는 앰비언트 라이트. LUMEA는 공간에 스며들어 존재감을 조용히 드러냅니다.</p>
+    </div>
+    <div class="showcase-media">
+      <img src="hero-2.jpg" alt="은은한 조명이 켜진 침실 협탁 위의 LUMEA Glow Diffuser">
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="wrap">
+    <p class="section-eyebrow center">Why LUMEA</p>
+    <div class="features-grid">
+      <div class="feature">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+        <h3>감성 무드 라이팅</h3>
+        <p>공간의 시간과 분위기에 맞춰 빛의 온도가 은은하게 변화합니다.</p>
+      </div>
+      <div class="feature">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="7" y="3" width="10" height="18" rx="4"/><path d="M10 7h4"/></svg>
+        <h3>프리미엄 미니멀 디자인</h3>
+        <p>불필요한 요소를 덜어낸 실루엣으로, 어떤 공간에도 자연스럽게 스며듭니다.</p>
+      </div>
+      <div class="feature">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3c-4 4-7 7.5-7 11a7 7 0 0014 0c0-3.5-3-7-7-11z"/></svg>
+        <h3>향과 빛의 조화</h3>
+        <p>디퓨징과 라이팅이 하나의 리듬으로 움직이며 몰입감 있는 무드를 만듭니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reserve" class="reserve">
+  <div class="wrap reserve-inner">
+    <p class="section-eyebrow center">Reservation</p>
+    <h2 class="center">가장 먼저, LUMEA를 만나보세요</h2>
+    <p class="reserve-sub center">사전예약 고객에게는 얼리버드 혜택이 제공됩니다.</p>
+
+    <div class="glow-dial" aria-hidden="true">
+      <svg viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="52" class="dial-track"/>
+        <circle id="dialProgress" cx="60" cy="60" r="52" class="dial-progress" transform="rotate(-90 60 60)"/>
+      </svg>
+      <div class="dial-label">
+        <strong id="countNum">0</strong>
+        <span>명 사전예약</span>
+      </div>
+    </div>
+
+    <form id="waitlistForm" class="reserve-form">
+      <div class="field">
+        <label for="name">이름</label>
+        <input id="name" name="name" type="text" placeholder="이름을 입력해주세요" required>
+      </div>
+      <div class="field">
+        <label for="email">이메일</label>
+        <input id="email" name="email" type="email" placeholder="name@email.com" required>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="ageGroup">연령대</label>
+          <select id="ageGroup" name="ageGroup" required>
+            <option value="" disabled selected>선택해주세요</option>
+            <option value="10대">10대</option>
+            <option value="20대">20대</option>
+            <option value="30대">30대</option>
+            <option value="40대">40대</option>
+            <option value="50대 이상">50대 이상</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="region">지역</label>
+          <select id="region" name="region" required>
+            <option value="" disabled selected>선택해주세요</option>
+            <option value="서울">서울</option>
+            <option value="경기·인천">경기·인천</option>
+            <option value="강원">강원</option>
+            <option value="충청">충청</option>
+            <option value="전라">전라</option>
+            <option value="경상">경상</option>
+            <option value="제주">제주</option>
+            <option value="해외/기타">해외/기타</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="reason">기대되는 이유 (한 줄)</label>
+        <input id="reason" name="reason" type="text" placeholder="예: 은은한 조명이 마음에 들어서">
+      </div>
+      <button type="submit" id="submitBtn" class="btn-primary btn-block">사전예약 신청하기</button>
+      <p id="formMsg" class="form-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <span class="wordmark small">LUMEA</span>
+    <p>© 2026 LUMEA. All rights reserved.</p>
+  </div>
+</footer>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>
